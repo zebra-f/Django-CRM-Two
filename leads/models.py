@@ -28,7 +28,13 @@ class Lead(models.Model):
     # on_delete=models.SET_DEFAULT, default='name'
     agent = models.ForeignKey("Agent", on_delete=models.SET_NULL, null=True)
 
+    def __str__(self):
+        return f"({self.id})- {self.first_name} {self.last_name}"
+
 
 class Agent(models.Model):
 
     user = models.OneToOneField("User", on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"({self.id})- {self.user.email}"
