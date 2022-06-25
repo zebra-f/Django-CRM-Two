@@ -10,12 +10,15 @@
   
   <body>
     
-    <a href="{% url 'leads:lead-list' %}">Go Back</a>
-    <hr>
-    <h1>{{ lead.first_name }} {{ lead.last_name }} {{ lead.age }}</h1>
-    <a href="{% url 'leads:lead-update' lead.id %}">Update</a>
-    <a href="{% url 'leads:lead-delete' lead.id %}">Delete</a>
+    <h1>Create a new lead</h1>
     
+    <form method="POST" action=".">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Submit</button>
+    </form>
+
+
 	{% comment %} <script src="index.js"></script> {% endcomment %}
   </body>
 </html>
