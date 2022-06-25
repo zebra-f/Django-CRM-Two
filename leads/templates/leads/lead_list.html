@@ -1,29 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>HTML 5 Boilerplate</title>
-    <link rel="stylesheet" href="style.css">
-  </head>
-  
-  <body>
-    
-    <h1>This is all of our leads</h1>
-    <a href="{% url 'leads:lead-create' %}">Create Lead</a>
-    <hr>
+{% extends 'base.html' %}
+{% block content %}
+   
 
-    {% for lead in leads %}
-      <div>
-        <a href="{% url 'leads:lead-detail' lead.id %}">
-          {{ lead.first_name }}
-          {{ lead.last_name }}
-          {{ lead.age }}
-        </a>
-      </div>
-    {% endfor %}
+<h1>This is all of our leads</h1>
+<a href="{% url 'leads:lead-create' %}">Create Lead</a>
+<hr>
 
-	{% comment %} <script src="index.js"></script> {% endcomment %}
-  </body>
-</html>
+{% for lead in leads %}
+  <div>
+    <a href="{% url 'leads:lead-detail' lead.id %}">
+      {{ lead.first_name }}
+      {{ lead.last_name }}
+      {{ lead.age }}
+    </a>
+  </div>
+{% endfor %}
+
+
+{% endblock content %}
