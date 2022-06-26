@@ -6,14 +6,13 @@
 
 #home-page-section {
     background-image: url('{% static 'images/00803.jpg' %}');
-    background-size: cover;
     background-repeat: no-repeat;
-    height: 100vh;
 }
 </style>
 
 
-<section id="home-page-section" class="hero is-fullheight is-default is-bold">
+{% comment %} <section id="home-page-section" class="hero is-fullheight is-default is-bold"> {% endcomment %}
+<section id="home-page-section" class="hero is-default is-bold">
   <div class="hero-body">
       <div class="container has-text-centered">
           <div class="columns is-vcentered">
@@ -22,12 +21,14 @@
 
               </div>
               
-
               <div class="column is-5 is-offset-1">
                 
+                
                 <div class="column right has-text-centered has-text-light">
-                  <h1 class="title is-4 has-text-light" style="text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;">Sign up today</h1>
+                  <h1 class="title is-3 has-text-light">Sign up today</h1>
                   <p class="description">Lorem ipsum dolor, sit amet consectetur adipisicing elit</p>
+                  <br />
+                  
                   <form>
                     <div class="field">
                       <div class="control">
@@ -44,7 +45,9 @@
                     <br />
                     <small><em>Lorem ipsum dolor sit amet consectetur.</em></small>
                   </form>
+
                 </div>
+                
               </div>
           </div>
       </div>
