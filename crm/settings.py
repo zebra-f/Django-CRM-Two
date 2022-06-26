@@ -39,7 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     
     'leads',
-    'landing'
+    'landing',
+
+    'fontawesomefree',
 ]
 
 MIDDLEWARE = [
