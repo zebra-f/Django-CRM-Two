@@ -1,11 +1,53 @@
-{% extends 'base.html' %}
-{% block content %}
+{% extends 'leads/base_leads.html' %}
+{% block content-leads %}
    
-<br>
-<h1>This is all of our leads</h1>
-<a href="{% url 'leads:lead-create' %}">Create Lead</a>
+<section class="hero is-info welcome is-small">
+  <div class="hero-body">
+      <div class="container">
+          <h1 class="title">
+              Hello,
+          </h1>
+          <h2 class="subtitle">
+              I hope you are having a great day!
+          </h2>
+      </div>
+  </div>
+</section>
 <hr>
+<section class="info-tiles">
+  <div class="tile is-ancestor has-text-centered">
+      <div class="tile is-parent">
+          <article class="tile is-child box">
+              <p class="title">439k</p>
+              <p class="subtitle">Users</p>
+          </article>
+      </div>
+      <div class="tile is-parent">
+          <article class="tile is-child box">
+              <p class="title">59k</p>
+              <p class="subtitle">Products</p>
+          </article>
+      </div>
+      <div class="tile is-parent">
+          <article class="tile is-child box">
+              <p class="title">3.4k</p>
+              <p class="subtitle">Open Orders</p>
+          </article>
+      </div>
+      <div class="tile is-parent">
+          <article class="tile is-child box">
+              <p class="title">19</p>
+              <p class="subtitle">Exceptions</p>
+          </article>
+      </div>
+  </div>
+</section>
+
+<a href="{% url 'leads:lead-create' %}">
+  <span class="tag is-success">Create Lead <i class="fa-solid fa-circle-plus fa-fw"></i></span>
   
+</a>
+
 <table class="table">
   <thead>
     <tr>
@@ -38,4 +80,4 @@
 
 
 
-{% endblock content %}
+{% endblock content-leads %}

@@ -1,7 +1,7 @@
-{% extends 'base.html' %}
-{% block content %}
+{% extends 'leads/base_leads.html' %}
+{% block content-leads %}
 
-    
+  
 <a href="{% url 'leads:lead-list' %}">Go Back</a>
 <hr>
 <h1>{{ lead.first_name }} {{ lead.last_name }} {{ lead.age }}</h1>
@@ -9,4 +9,4 @@
 <a href="{% url 'leads:lead-delete' lead.id %}">Delete</a>
     
 
-{% endblock content %}
+{% endblock content-leads %}

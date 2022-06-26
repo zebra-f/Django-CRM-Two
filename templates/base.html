@@ -19,17 +19,22 @@
     <link href="{% static 'fontawesomefree/css/brands.css' %}" rel="stylesheet" type="text/css">
     <link href="{% static 'fontawesomefree/css/solid.css' %}" rel="stylesheet" type="text/css">
 
+
+    <style>
+      a, a:hover, a:focus, a:active {
+        text-decoration: none;
+        color: inherit;
+      }
+    </style>
   </head>
   
   <body>
     {% include 'navbar.html' %}
     
-    <div class="container">
     {% block content %}    
     {% endblock content %}
 
     {% include 'footer.html' %}
-    </div>   
 	  {% comment %} <script src="index.js"></script> {% endcomment %}
 
   </body>
