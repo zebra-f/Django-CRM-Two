@@ -4,16 +4,21 @@
 
 <style>
 
-#home-page-section {
-    background-image: url('{% static 'images/00650.JPG' %}');
-    background-size: cover;
-    background-repeat: no-repeat;
+#home-page-image-section {
+  background-image: url('{% static 'images/00650.JPG' %}');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+#home-page-sing-up {
+  background: rgba(0, 0, 0, .25);
+  border-radius: 20px;
 }
 </style>
 
 
 {% comment %} <section id="home-page-section" class="hero is-fullheight is-default is-bold"> {% endcomment %}
-<section id="home-page-section" class="hero is-default is-bold">
+<section id="home-page-image-section" class="hero is-default is-bold">
   <div class="hero-body my-6">
       <div class="container has-text-centered">
           <div class="columns is-vcentered">
@@ -25,7 +30,7 @@
               <div class="column is-5 is-offset-1">
                 
                 
-                <div class="column right has-text-centered has-text-light">
+                <div id="home-page-sing-up" class="column right has-text-centered has-text-light">
                   
                   <h1 class="title is-3 has-text-light">Sign up today</h1>
                   <p class="description">Lorem ipsum dolor, sit amet consectetur adipisicing elit</p>
@@ -63,7 +68,7 @@
     <div class="container">
       <div class="is-flex is-flex-wrap-wrap is-justify-content-to-right">
 
-        <div class="card is-shady">
+        <div class="card is-shady" style="box-shadow: 0.4rem 0.4rem 1.2rem rgba(119, 136, 153, .6);">
           <div class="card-content">
             <div class="media">
               <div class="media-left">
@@ -78,7 +83,7 @@
             </div>
         
             <div class="content">
-              "It has never been easy to manage a buisness”	&#x1F605; says who &#x1F61C; ? 
+              "It has never been easy to manage a business”	&#x1F605; says who &#x1F61C; ? 
               <br>
               Thanks to <a class="has-text-link">@bulmaio</a> &#x1F60E; I can finally have some free time for myself &#x1F969; &#x26BE;  &#x1F357;  
               <a class="has-text-link">@crm</a>.
