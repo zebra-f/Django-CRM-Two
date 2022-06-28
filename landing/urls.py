@@ -1,11 +1,10 @@
 from django.urls import path, include
-
-from .views import home_page
+from django.views.generic import TemplateView
 
 
 # required for the `namespace` keyword arguemtn in crm.urls
 app_name = 'landing'
 
 urlpatterns = [
-    path('', home_page, name='home-page'),
+    path('', TemplateView.as_view(template_name="landing/home_page.html"), name='home-page'),
 ]
