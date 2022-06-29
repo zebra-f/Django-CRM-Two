@@ -1,37 +1,38 @@
 from django.shortcuts import render, redirect  
-from django.urls import reverse, reverse_lazy
+from django.urls import reverse_lazy
 from django.http import HttpResponse
 from django.views.generic import (
     TemplateView, ListView, DeleteView, DetailView, RedirectView, CreateView, UpdateView
     )
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .models import Lead, Agent, User
 from .forms import LeadModelForm
 
 # Create your views here.
 
-class LeadListView(ListView):
+class LeadListView(LoginRequiredMixin, ListView):
 
     template_name: str = 'leads/lead_list.html'
     model = Lead
     context_object_name = 'leads'
     
 
-class LeadDetailView(DetailView):
+class LeadDetailView(LoginRequiredMixin, DetailView):
 
     template_name = 'leads/lead_detail.html'
     model = Lead
     context_object_name = 'lead'
 
 
-class LeadCreateView(CreateView):
+class LeadCreateView(LoginRequiredMixin, CreateView):
 
     template_name = 'leads/lead_create.html'
     form_class = LeadModelForm
     success_url = reverse_lazy('leads:lead-list')
 
 
-class LeadUpdateView(UpdateView):
+class LeadUpdateView(LoginRequiredMixin, UpdateView):
     
     template_name = 'leads/lead_update.html'
     model = Lead

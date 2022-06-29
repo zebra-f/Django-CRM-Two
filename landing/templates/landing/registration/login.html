@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container">
+
+    <div class="">
+        <a class="" href="#">Don't have an account?</a>
+    </div>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form }}
+        <button type='submit' class="">
+            Login
+        </button>
+    </form>
+    <div class="">
+        <a class="" href="#">Forgot password?</a>
+    </div>
+</div>
+
+{% endblock content %}
