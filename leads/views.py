@@ -1,6 +1,6 @@
-from django.shortcuts import render, redirect  
-from django.urls import reverse_lazy
-from django.http import HttpResponse
+from django.shortcuts import render, redirect
+from django.urls import reverse_lazy, reverse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.views.generic import (
     TemplateView, ListView, DeleteView, DetailView, RedirectView, CreateView, UpdateView
     )
@@ -21,7 +21,7 @@ class SignupView(CreateView):
 
     def get(self, request, *args, **kwargs):
         if request.user.is_authenticated:
-            return redirect('leads:lead-list')
+            return HttpResponseRedirect(reverse('leads:lead-list'))
         else:
             return super().get(request, *args, **kwargs)
 
