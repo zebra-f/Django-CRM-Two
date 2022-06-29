@@ -1,6 +1,8 @@
+
 <div class="hero-head">
-  <div class="container">
-    <nav class="navbar" role="navigation" aria-label="main navigation">
+
+  <nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="container">
       <div class="navbar-brand">
         <a class="navbar-item" href="{% url 'landing:home-page' %}">
           <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
@@ -89,4 +91,15 @@
     });
   
   });
+  window.onscroll = () => {
+    if (this.lastScroll > this.scrollY) {
+      document.querySelector('.navbar').classList.add('is-fixed-top')
+      document.querySelector('body').classList.add('has-navbar-fixed-top')
+    } else {
+      document.querySelector('.navbar').classList.remove('is-fixed-top')
+      document.querySelector('body').classList.remove('has-navbar-fixed-top')
+    }
+    this.lastScroll = this.scrollY;
+  }
+  
 </script>
