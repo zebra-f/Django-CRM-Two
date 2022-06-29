@@ -22,10 +22,13 @@ from django.contrib.auth.views import (
     LogoutView,
     )
 
+from leads.views import SignupView
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-
+    
+    # authentication
     path('login/', LoginView.as_view(
         next_page=reverse_lazy("leads:lead-list"),
         redirect_authenticated_user=True,
@@ -33,7 +36,9 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(
         next_page=reverse_lazy("landing:home-page")
         ), name='logout'),
+    path('signup/', SignupView.as_view(), name='signup'),
 
+    # apps
     path('', include('landing.urls', namespace='landing')),
     path('leads/', include('leads.urls', namespace='leads')),
 

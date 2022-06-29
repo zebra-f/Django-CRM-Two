@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect  
+from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 from django.http import HttpResponse
 from django.views.generic import (
@@ -10,6 +11,17 @@ from .models import Lead, Agent, User
 from .forms import LeadModelForm
 
 # Create your views here.
+
+# Registration
+
+class SignupView(CreateView):
+    
+    template_name = 'registration/signup.html'
+    form_class = UserCreationForm
+    success_url = reverse_lazy('login')
+
+
+# Leads
 
 class LeadListView(LoginRequiredMixin, ListView):
 
@@ -46,6 +58,9 @@ def lead_delete(request, pk):
     lead.delete()
 
     return redirect('/leads')
+
+
+
 
 
 
