@@ -41,6 +41,7 @@ urlpatterns = [
     # apps
     path('', include('landing.urls', namespace='landing')),
     path('leads/', include('leads.urls', namespace='leads')),
+    path('agents/',include('agents.urls', namespace='agents')),
 
     # static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 ]

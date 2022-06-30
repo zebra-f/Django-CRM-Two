@@ -2,7 +2,7 @@
 {% block content-dashboard %}
 
 
-<h1>Update Lead: {{ lead.first_name }} {{ lead.last_name }}</h1>
+<h1>Update Agent: {{ agent.name }}</h1>
 
 <form method="POST" action=".">
   {% csrf_token %}

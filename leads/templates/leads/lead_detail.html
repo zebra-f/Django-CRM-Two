@@ -1,5 +1,5 @@
-{% extends 'leads/base_leads.html' %}
-{% block content-leads %}
+{% extends 'dashboard/base_dashboard.html' %}
+{% block content-dashboard %}
 
   
 <a href="{% url 'leads:lead-list' %}">Go Back</a>
@@ -9,4 +9,4 @@
 <a href="{% url 'leads:lead-delete' lead.id %}">Delete</a>
     
 
-{% endblock content-leads %}
+{% endblock content-dashboard %}

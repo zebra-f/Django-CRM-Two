@@ -1,0 +1,12 @@
+{% extends 'dashboard/base_dashboard.html' %}
+{% block content-dashboard %}
+
+  
+<a href="{% url 'agents:agent-list' %}">Go Back</a>
+<hr>
+<h1>{{ agent.name }}</h1>
+<a href="{% url 'agents:agent-list' agent.id %}">Update</a>
+<a href="{% url 'agents:agent-list' agent.id %}">Delete</a>
+    
+
+{% endblock content-dashboard %}

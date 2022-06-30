@@ -43,8 +43,8 @@
   </div>
 </section>
 
-<a href="{% url 'leads:lead-create' %}">
-  <span class="tag is-success">Create Lead <i class="fa-solid fa-circle-plus fa-fw"></i></span>
+<a href="{% url 'agents:agent-create' %}">
+  <span class="tag is-success">Create Agent<i class="fa-solid fa-circle-plus fa-fw"></i></span>
   
 </a>
 
@@ -59,12 +59,12 @@
     </tr>
   </thead>
   
-  {% for lead in leads %}
+  {% for agent in agents %}
   <tbody>
     <tr>
-      <th>{{ lead.id }}</th>
+      <th>{{ agent.id }}</th>
       <td>
-        <a href="{% url 'leads:lead-detail' lead.id %}" title="Details">{{ lead.first_name }}  {{ lead.last_name }}</a>
+        <a href="{% url 'agents:agent-detail' agent.id %}" title="Details">{{ agent.name }}</a>
       </td>
       <td>
         <span class="tag is-primary"><i class="fa-solid fa-pen"></i></span>

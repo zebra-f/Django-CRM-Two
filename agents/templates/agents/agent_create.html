@@ -1,8 +1,8 @@
 {% extends 'dashboard/base_dashboard.html' %}
 {% block content-dashboard %}
+    
 
-
-<h1>Update Lead: {{ lead.first_name }} {{ lead.last_name }}</h1>
+<h1>Create a new lead</h1>
 
 <form method="POST" action=".">
   {% csrf_token %}
