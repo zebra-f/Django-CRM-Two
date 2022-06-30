@@ -4,9 +4,9 @@
   
 <a href="{% url 'agents:agent-list' %}">Go Back</a>
 <hr>
-<h1>{{ agent.name }}</h1>
-<a href="{% url 'agents:agent-list' agent.id %}">Update</a>
-<a href="{% url 'agents:agent-list' agent.id %}">Delete</a>
+<h1>{{ agent.user.username }}</h1>
+<a href="{% url 'agents:agent-update' agent.id %}">Update</a>
+<a href="{% url 'agents:agent-delete' agent.id %}">Delete</a>
     
 
 {% endblock content-dashboard %}

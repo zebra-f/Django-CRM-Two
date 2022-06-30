@@ -6,7 +6,8 @@ from django.views.generic import (
     )
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-from leads.models import Lead, Agent
+from leads.models import Agent
+from .forms import AgentModelForm
 
 # Create your views here.
 
@@ -32,21 +33,28 @@ class AgentDetailView(LoginRequiredMixin, DetailView):
 class AgentCreateView(LoginRequiredMixin, CreateView):
 
     template_name = 'agents/agent_create.html'
-    form_class = None
+    form_class = AgentModelForm
     success_url = reverse_lazy('agents:agent-list')
+
+    def form_valid(self, form):
+        
+        agent = form.save(commit=False)
+        agent.affiliation = self.request.user.affiliation
+        agent.save()
+        return super().form_valid(form)
 
 
 class AgentUpdateView(LoginRequiredMixin, UpdateView):
     
     template_name = 'agent/agen_update.html'
     model = Agent
-    form_class = None
+    form_class = AgentModelForm
     success_url = reverse_lazy('agents:agent-list')
 
 
 def agent_delete(request, pk):
 
-    lead = Lead.objects.get(id=pk)
-    lead.delete()
+    agent = Agent.objects.get(id=pk)
+    agent.delete()
 
     return redirect('/agents')

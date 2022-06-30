@@ -64,7 +64,7 @@
     <tr>
       <th>{{ agent.id }}</th>
       <td>
-        <a href="{% url 'agents:agent-detail' agent.id %}" title="Details">{{ agent.name }}</a>
+        <a href="{% url 'agents:agent-detail' agent.id %}" title="Details">{{ agent.user.username }}</a>
       </td>
       <td>
         <span class="tag is-primary"><i class="fa-solid fa-pen"></i></span>
