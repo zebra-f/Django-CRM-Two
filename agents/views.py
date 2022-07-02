@@ -7,7 +7,7 @@ from django.views.generic import (
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from leads.models import Agent
-from .forms import AgentModelForm
+from .forms import AgentModelForm, AgentUpdateModelForm
 
 # Create your views here.
 
@@ -49,7 +49,7 @@ class AgentUpdateView(LoginRequiredMixin, UpdateView):
     
     template_name = 'agents/agent_update.html'
     model = Agent
-    form_class = AgentModelForm
+    form_class = AgentUpdateModelForm
     success_url = reverse_lazy('agents:agent-list')
 
 

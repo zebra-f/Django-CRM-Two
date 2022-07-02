@@ -9,3 +9,14 @@ class AgentModelForm(forms.ModelForm):
         fields = (
             'user',
         )
+
+
+class AgentUpdateModelForm(forms.ModelForm):
+
+    class Meta:
+        model = Agent
+        fields = (
+            'user',
+            'affiliation'
+        )
+
