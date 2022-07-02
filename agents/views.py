@@ -41,12 +41,13 @@ class AgentCreateView(LoginRequiredMixin, CreateView):
         agent = form.save(commit=False)
         agent.affiliation = self.request.user.affiliation
         agent.save()
-        return super().form_valid(form)
+
+        return HttpResponseRedirect(self.success_url)
 
 
 class AgentUpdateView(LoginRequiredMixin, UpdateView):
     
-    template_name = 'agent/agen_update.html'
+    template_name = 'agents/agent_update.html'
     model = Agent
     form_class = AgentModelForm
     success_url = reverse_lazy('agents:agent-list')
