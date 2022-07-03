@@ -62,14 +62,14 @@ class AgentCreateView(LoginRequiredMixin, OwnerRequiredMixin, CreateView):
             affiliation = self.request.user.affiliation
         )
 
-        # send_mail(
-        #     subject="Agent Invitation",
-        #     message="You were added as an Agent. Please login",
-        #     from_email="admin@test.com",
-        #     recipient_list=[
-        #         user.email
-        #     ]
-        # )
+        send_mail(
+            subject="Agent Invitation",
+            message="You were added as an Agent. Please login",
+            from_email="test@test.com",
+            recipient_list=[
+                user.email
+            ]
+        )
 
         return HttpResponseRedirect(self.success_url)
 
