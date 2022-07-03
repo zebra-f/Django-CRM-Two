@@ -18,14 +18,19 @@
       <div id="navbarBasicExample" class="navbar-menu">
         <div class="navbar-start">
           
+          
           {% if request.user.is_authenticated %}
+            {% if request.user.is_owner %}
+              <a class="navbar-item" href="{% url 'agents:agent-list' %}">
+                Agents
+              </a>
+            {% endif %}
+            
             <a class="navbar-item" href="{% url 'leads:lead-list' %}">
               Leads
             </a>
-            <a class="navbar-item" href="{% url 'agents:agent-list' %}">
-              Agents
-            </a>
           {% endif %}
+
 
           <a class="navbar-item">
             Home

@@ -33,7 +33,7 @@ class LeadModelForm(forms.ModelForm):
             'agent'
         )
 
-class CustomuserCreationForm(UserCreationForm):
+class CustomUserCreationForm(UserCreationForm):
 
     class Meta:
 

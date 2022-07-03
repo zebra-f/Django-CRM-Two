@@ -7,7 +7,7 @@ from django.views.generic import (
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .models import Lead, Agent, User
-from .forms import LeadModelForm, CustomuserCreationForm
+from .forms import LeadModelForm, CustomUserCreationForm
 
 # Create your views here.
 
@@ -16,7 +16,7 @@ from .forms import LeadModelForm, CustomuserCreationForm
 class SignupView(CreateView):
     
     template_name = 'registration/signup.html'
-    form_class = CustomuserCreationForm
+    form_class = CustomUserCreationForm
     success_url = reverse_lazy('login')
 
     def get(self, request, *args, **kwargs):
