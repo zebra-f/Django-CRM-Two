@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path, include, reverse_lazy
 from django.conf import settings
 from django.conf.urls.static import static
+from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.views import (
     LoginView,
     LogoutView,
@@ -26,6 +27,10 @@ from django.contrib.auth.views import (
     )
 
 from leads.views import SignupView
+
+
+class CustomPasswordResetConfirmView(SuccessMessageMixin, PasswordResetConfirmView):
+    pass
 
 
 urlpatterns = [
@@ -42,13 +47,13 @@ urlpatterns = [
     path('signup/', SignupView.as_view(), name="signup"),
     # reset
     path('password-reset/', PasswordResetView.as_view(
-        success_url = reverse_lazy("password-reset-done")
+        success_url=reverse_lazy("password-reset-done")
         ), name='password-reset'),
     path('password-reset-done/', PasswordResetDoneView.as_view(), name="password-reset-done"),
-    path('password-reset-confirm/<uidb64>/<token>/', PasswordResetConfirmView.as_view(
-        success_url = reverse_lazy("login")
+    path('password-reset-confirm/<uidb64>/<token>/', CustomPasswordResetConfirmView.as_view(
+        success_url=reverse_lazy("login"),
+        success_message = "A new password was set, now you can log in...",
     ), name="password-reset-confirm"),
-    # path('password-reset-confirm/', PasswordResetConfirmView.as_view(), name="password_reset_confirm"),
 
     # apps
     path('', include('landing.urls', namespace="landing")),
