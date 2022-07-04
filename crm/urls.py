@@ -20,6 +20,9 @@ from django.conf.urls.static import static
 from django.contrib.auth.views import (
     LoginView,
     LogoutView,
+    PasswordResetView,
+    PasswordResetDoneView,
+    PasswordResetConfirmView,
     )
 
 from leads.views import SignupView
@@ -36,12 +39,21 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(
         next_page=reverse_lazy("landing:home-page")
         ), name='logout'),
-    path('signup/', SignupView.as_view(), name='signup'),
+    path('signup/', SignupView.as_view(), name="signup"),
+    # reset
+    path('password-reset/', PasswordResetView.as_view(
+        success_url = reverse_lazy("password-reset-done")
+        ), name='password-reset'),
+    path('password-reset-done/', PasswordResetDoneView.as_view(), name="password-reset-done"),
+    path('password-reset-confirm/<uidb64>/<token>/', PasswordResetConfirmView.as_view(
+        success_url = reverse_lazy("login")
+    ), name="password-reset-confirm"),
+    # path('password-reset-confirm/', PasswordResetConfirmView.as_view(), name="password_reset_confirm"),
 
     # apps
-    path('', include('landing.urls', namespace='landing')),
-    path('leads/', include('leads.urls', namespace='leads')),
-    path('agents/',include('agents.urls', namespace='agents')),
+    path('', include('landing.urls', namespace="landing")),
+    path('leads/', include('leads.urls', namespace="leads")),
+    path('agents/',include('agents.urls', namespace="agents")),
 
     # static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 ]
