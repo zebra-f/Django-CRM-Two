@@ -7,6 +7,9 @@ from django.views.generic import (
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.mail import send_mail
 
+from django.utils.crypto import get_random_string
+
+
 from leads.models import Agent
 from .forms import AgentUpdateModelForm, UserAgentModelForm
 from .mixins import OwnerRequiredMixin
@@ -52,9 +55,8 @@ class AgentCreateView(LoginRequiredMixin, OwnerRequiredMixin, CreateView):
         user = form.save(commit=False)
         user.is_owner = False
         user.is_agent = True
-        # TODO
-        # randomize password
-        user.set_password("password1234")
+
+        user.set_password(get_random_string(24))
         user.save()
         
         Agent.objects.create(
