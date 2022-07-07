@@ -5,6 +5,8 @@
 <a href="{% url 'leads:lead-list' %}">Go Back</a>
 <hr>
 <h1>{{ lead.first_name }} {{ lead.last_name }} {{ lead.age }}</h1>
+<hr />
+<h1>{{ lead.affiliation }} {{ lead.agent }}</h1>
 <a href="{% url 'leads:lead-update' lead.id %}">Update</a>
 <a href="{% url 'leads:lead-delete' lead.id %}">Delete</a>
     

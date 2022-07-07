@@ -6,7 +6,7 @@ from .models import Lead, User, Agent
 
 class LeadModelForm(forms.ModelForm):
     
-    agent = forms.ModelChoiceField(queryset=None)
+    # agent = forms.ModelChoiceField(queryset=Agent.objects.all())
 
     class Meta:
 
@@ -16,15 +16,14 @@ class LeadModelForm(forms.ModelForm):
             'last_name',
             'age',
             'source',
+            'agent',
         )
 
-    def __init__(self, *args, **kwargs):
-        initial = kwargs['initial']
-        agents = Agent.objects.filter(affiliation=initial['user'].user.affiliation)
-
-        super().__init__(*args, **kwargs)
-
-        self.fields["agent"].queryset = agents
+    # def __init__(self, *args, **kwargs):
+    #     initial = kwargs['initial']
+    #     agents = Agent.objects.filter(affiliation=initial['user'].user.affiliation)
+    #     super().__init__(*args, **kwargs)
+    #     self.fields["agent"].queryset = agents
         
 
 

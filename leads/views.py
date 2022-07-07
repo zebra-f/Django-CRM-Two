@@ -6,6 +6,9 @@ from django.views.generic import (
     )
 from django.contrib.auth.mixins import LoginRequiredMixin
 
+from django import forms
+
+
 from .models import Lead, Agent, User
 from .forms import LeadModelForm, CustomUserCreationForm
 
@@ -38,9 +41,10 @@ class LeadListView(LoginRequiredMixin, ListView):
         
         user = self.request.user
         
-        queryset = Lead.objects.filter(affiliation=user.affiliation)
-
-        if user.is_agent:
+        if user.is_owner:
+            queryset = Lead.objects.filter(affiliation=user.affiliation)
+        elif user.is_agent:
+            queryset = Lead.objects.filter(affiliation=user.agent.affiliation)
             queryset = queryset.filter(agent=user.agent)
         
         return queryset
@@ -61,14 +65,38 @@ class LeadCreateView(LoginRequiredMixin, CreateView):
 
 
     def get_initial(self):
-        self.initial['user'] = self.request.user.affiliation 
+        # if self.request.user.is_owner:
+        #     self.initial['user'] = self.request.user.affiliation 
         # self.initial['first_name'] = "John"
         return super().get_initial()
 
 
+    def get_form(self, form_class=None):
+        """Return an instance of the form to be used in this view."""
+        if form_class is None:
+            form_class = self.get_form_class()
+        
+        if self.request.user.is_owner:
+            form_class.base_fields['agent'] = forms.ModelChoiceField(
+                queryset=Agent.objects.filter(affiliation=self.request.user.affiliation))  
+        # `form_valid` method will handle `agent` field
+        elif self.request.user.is_agent and self.request.method == 'GET':
+            del form_class.base_fields['agent'] 
+        
+        return form_class(**self.get_form_kwargs())
+
+
     def form_valid(self, form):
         lead = form.save(commit=False)
-        lead.affiliation = self.request.user.affiliation
+        
+        if self.request.user.is_owner:
+            lead.affiliation = self.request.user.affiliation
+        elif self.request.user.is_agent:
+            lead.affiliation = self.request.user.agent.affiliation
+        
+        if self.request.user.is_agent:
+            lead.agent = self.request.user.agent
+
         lead.save()
 
         return HttpResponseRedirect(self.success_url)
