@@ -30,9 +30,20 @@ class SignupView(CreateView):
 
 class LeadListView(LoginRequiredMixin, ListView):
 
-    template_name: str = 'leads/lead_list.html'
+    template_name = 'leads/lead_list.html'
     model = Lead
     context_object_name = 'leads'
+
+    def get_queryset(self):
+        
+        user = self.request.user
+        
+        queryset = Lead.objects.filter(affiliation=user.affiliation)
+
+        if user.is_agent:
+            queryset = queryset.filter(agent=user.agent)
+        
+        return queryset
     
 
 class LeadDetailView(LoginRequiredMixin, DetailView):
@@ -47,6 +58,20 @@ class LeadCreateView(LoginRequiredMixin, CreateView):
     template_name = 'leads/lead_create.html'
     form_class = LeadModelForm
     success_url = reverse_lazy('leads:lead-list')
+
+
+    def get_initial(self):
+        self.initial['user'] = self.request.user.affiliation 
+        # self.initial['first_name'] = "John"
+        return super().get_initial()
+
+
+    def form_valid(self, form):
+        lead = form.save(commit=False)
+        lead.affiliation = self.request.user.affiliation
+        lead.save()
+
+        return HttpResponseRedirect(self.success_url)
 
 
 class LeadUpdateView(LoginRequiredMixin, UpdateView):

@@ -18,4 +18,5 @@ urlpatterns = [
     path('<int:pk>/update/', LeadUpdateView.as_view(), name='lead-update'),
     path('<int:pk>/delete/', lead_delete, name='lead-delete'),
     path('create/', LeadCreateView.as_view(), name='lead-create'),
+    # path('create/', lead_create, name='lead-create'),
 ]

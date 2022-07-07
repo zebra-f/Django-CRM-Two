@@ -1,26 +1,12 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, UsernameField
 
-from .models import Lead, User
+from .models import Lead, User, Agent
 
-
-# class LeadForm(forms.Form):
-    
-#     SOURCE_CHOICES = (
-#         ('Youtube', 'Youtube'),
-#         ('Google', 'Google'),
-#         ('Facebook', 'Facebook'),
-#         ('Newsletter', 'Newsletter'),
-#         ('Other', 'Other'),
-#     )
-
-#     first_name = forms.CharField()
-#     last_name = forms.CharField()
-#     age = forms.IntegerField(min_value=18, max_value=120)
-
-#     source = forms.ChoiceField(choices=SOURCE_CHOICES)
 
 class LeadModelForm(forms.ModelForm):
+    
+    agent = forms.ModelChoiceField(queryset=None)
 
     class Meta:
 
@@ -30,8 +16,17 @@ class LeadModelForm(forms.ModelForm):
             'last_name',
             'age',
             'source',
-            'agent'
         )
+
+    def __init__(self, *args, **kwargs):
+        initial = kwargs['initial']
+        agents = Agent.objects.filter(affiliation=initial['user'].user.affiliation)
+
+        super().__init__(*args, **kwargs)
+
+        self.fields["agent"].queryset = agents
+        
+
 
 class CustomUserCreationForm(UserCreationForm):
 

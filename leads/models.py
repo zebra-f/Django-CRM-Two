@@ -40,6 +40,7 @@ class Lead(models.Model):
     # on_delete=models.CASCADE
     # on_delete=models.SET_DEFAULT, default='name'
     agent = models.ForeignKey("Agent", on_delete=models.SET_NULL, null=True)
+    affiliation = models.ForeignKey("Affiliation", on_delete=models.CASCADE)
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
@@ -57,12 +58,13 @@ class Agent(models.Model):
 # Signals 
 
 def post_user_created_singal(sender, instance, created, **kwargs):
-    
-    # print(instance, created, sender)
+    ''' Create affiliation if user is_owner == True (created via 'sign up'),
+        if user is_owner == False (created via 'created Agent') do nothing
+    '''
+
     if created:
-        Affiliation.objects.create(user=instance)
-    else:
-        pass
-    
+        if instance.is_owner:
+            Affiliation.objects.create(user=instance)
+   
 
 post_save.connect(post_user_created_singal, sender=User)
