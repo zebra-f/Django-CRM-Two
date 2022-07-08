@@ -60,22 +60,23 @@
   </thead>
   
   {% for lead in leads %}
-  <tbody>
-    <tr>
-      <th>{{ lead.id }}</th>
-      <td>
-        <a href="{% url 'leads:lead-detail' lead.id %}" title="Details">{{ lead.first_name }}  {{ lead.last_name }}</a>
-      </td>
-      <td>
-        <span class="tag is-primary"><i class="fa-solid fa-pen"></i></span>
-      </td>
-      <td>
-        <span class="tag is-danger"><i class="fa-solid fa-trash"></i></span>
-      </td>
-      <td>Qualification for the <a href="https://en.wikipedia.org/wiki/2016%E2%80%9317_UEFA_Champions_League#Group_stage" title="2016–17 UEFA Champions League">Champions League group stage</a></td>
-    </tr>
-  </tbody>
+    <tbody>
+      <tr>
+        <th>{{ lead.id }}</th>
+        <td>
+          <a href="{% url 'leads:lead-detail' lead.id %}" title="Details">{{ lead.first_name }}  {{ lead.last_name }}</a>
+        </td>
+        <td>
+          <span class="tag is-primary"><i class="fa-solid fa-pen"></i></span>
+        </td>
+        <td>
+          <span class="tag is-danger"><i class="fa-solid fa-trash"></i></span>
+        </td>
+        <td>Qualification for the <a href="https://en.wikipedia.org/wiki/2016%E2%80%9317_UEFA_Champions_League#Group_stage" title="2016–17 UEFA Champions League">Champions League group stage</a></td>
+      </tr>
+    </tbody>
   {% endfor %}
+
 </table>
 
 

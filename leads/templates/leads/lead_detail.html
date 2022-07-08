@@ -9,6 +9,7 @@
 <h1>{{ lead.affiliation }} {{ lead.agent }}</h1>
 <a href="{% url 'leads:lead-update' lead.id %}">Update</a>
 <a href="{% url 'leads:lead-delete' lead.id %}">Delete</a>
+<a href="{% url 'leads:lead-assign-agent-update' lead.id %}">Assign</a>
     
 
 {% endblock content-dashboard %}
