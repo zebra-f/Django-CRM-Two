@@ -1,20 +1,19 @@
-{% extends 'base.html' %}
+{% extends 'landing/base_landing.html' %}
 {% load static %}
-{% block content %}
+{% block content-landing %}
 
 <style>
+  #home-page-image-section {
+    background-image: url('{% static 'images/00650.JPG' %}');
+    background-attachment: fixed;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
 
-#home-page-image-section {
-  background-image: url('{% static 'images/00650.JPG' %}');
-  background-attachment: fixed;
-  background-size: cover;
-  background-repeat: no-repeat;
-}
-
-#home-page-sing-up {
-  background: rgba(0, 0, 0, .25);
-  border-radius: 20px;
-}
+  #home-page-sing-up {
+    background: rgba(0, 0, 0, .25);
+    border-radius: 20px;
+  }
 </style>
 
 
@@ -29,7 +28,6 @@
               </div>
               
               <div class="column is-5 is-offset-1">
-                
                 
                 <div id="home-page-sing-up" class="column right has-text-centered has-text-light">
                   
@@ -56,8 +54,8 @@
 
                 </div>
                 
-                
               </div>
+
           </div>
       </div>
   </div>
@@ -157,4 +155,4 @@
 {% comment %} <script src="../js/bulma.js"></script> {% endcomment %}
 
 
-{% endblock content %}
+{% endblock content-landing %}

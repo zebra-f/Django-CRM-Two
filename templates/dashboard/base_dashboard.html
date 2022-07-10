@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block content %}
+{% block body %}
 <hr>
 <section class="container">
   <div class="columns">
@@ -10,8 +10,27 @@
         </p>
         <ul class="menu-list">
           <li><a>Dashboard</a></li>
-          <li><a>Customers</a></li>
+          <li><a href="{% url 'leads:lead-list' %}">Leads</a></li>
+          {% if request.user.is_owner %}
+            <li><a href="{% url 'agents:agent-list' %}">Agents</a></li>
+          {% endif %}
         </ul>
+        
+        <p class="menu-label">
+          Profile
+        </p>
+
+        <ul class="menu-list">
+          <li>
+            <a class="is-active has-background-info">Settings</a>
+            <ul>
+              <li><a class="button is-light" href="{% url 'logout' %}">
+                Log out
+              </a></li>
+            </ul>
+        </li>
+        </ul>
+
         <p class="menu-label">
           Administration
         </p>
@@ -49,5 +68,5 @@
     </div>
   </div>
 </section>
-{% endblock content %}
+{% endblock body %}
 

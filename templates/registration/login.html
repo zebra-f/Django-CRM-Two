@@ -1,9 +1,6 @@
-{% extends 'base.html' %}
-{% comment %} {% load static %} {% endcomment %}
-{% block content %}
-
-
-<div class="container">
+{% extends 'registration/base_registration.html' %}
+{% load crispy_forms_filters %}
+{% block content-registration %}
 
     {% if messages %}
         {% for message in messages %}
@@ -14,20 +11,22 @@
         {% endfor %}
     {% endif %}
 
+    <form method="post">
+        {% csrf_token %}
+        {{ form|crispy }}
+
+        <div class="control">
+            <button type="submit" class="button is-block is-primary is-fullwidth is-medium">Login</button>
+        </div>
+    </form>
+
+    <br />
+    <div class="">
+        <a class="" href="{% url 'password-reset' %}">Forgot password?</a>
+    </div>
     <div class="">
         <a class="" href="{% url 'signup' %}">Don't have an account?</a>
     </div>
 
-    <form method="post">
-        {% csrf_token %}
-        {{ form }}
-        <button type='submit' class="button">
-            Login
-        </button>
-    </form>
-    <div class="">
-        <a class="" href="{% url 'password-reset' %}">Forgot password?</a>
-    </div>
-</div>
 
-{% endblock content %}
+{% endblock content-registration %}

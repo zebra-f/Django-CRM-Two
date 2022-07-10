@@ -1,0 +1,29 @@
+{% extends 'landing/base_landing.html' %}
+{% block content-landing %}
+
+    <div class="hero-body my-6">
+      <div class="container has-text-centered">
+          <div class="columns is-vcentered">
+              
+            <div class="column is-3">
+            </div>
+              
+            <div class="column is-6">
+              <div class="column right has-text-centered">
+                
+                {% block content-registration %}
+                {% endblock content-registration %}
+
+              </div>
+            </div>
+
+            <div class="column is-3">
+            </div>
+
+          </div>
+      </div>
+    </div>
+
+
+{% endblock content-landing %}
+
