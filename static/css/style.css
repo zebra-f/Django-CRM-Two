@@ -1,11 +1,14 @@
 
-#first-column {
-height:100vh;
-overflow-y:scroll;
-}
+
 
 #second-column {
 height:100vh;
 overflow-y:scroll;
 }
 
+@media (min-width: 769px){
+    #first-column {
+        height:100vh;
+        overflow-y:scroll;
+        }
+}
