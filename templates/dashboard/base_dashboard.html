@@ -1,14 +1,15 @@
 {% extends 'base.html' %}
 {% block body %}
-<hr>
 <section class="container">
   <div class="columns">
-    <div class="column is-2">
-      <aside class="menu">
+    
+    <div id="first-column" class="column is-2">
+      <aside class="menu my-4">
         <p class="menu-label">
           General
         </p>
         <ul class="menu-list">
+          <li><a href="{% url 'landing:home-page' %}">Homepage</a></li>
           <li><a>Dashboard</a></li>
           <li><a href="{% url 'leads:lead-list' %}">Leads</a></li>
           {% if request.user.is_owner %}
@@ -58,7 +59,8 @@
         </ul>
       </aside>
     </div>
-    <div class="column is-10">
+    
+    <div id="second-column" class="column-split column is-10">
       <div class="box content">
 
         {% block content-dashboard %}
@@ -66,6 +68,7 @@
 
       </div>
     </div>
+
   </div>
 </section>
 {% endblock body %}

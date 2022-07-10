@@ -1,4 +1,5 @@
 {% extends 'dashboard/base_dashboard.html' %}
+{% load crispy_forms_filters %}
 {% block content-dashboard %}
 
 
@@ -6,9 +7,17 @@
 
 <form method="POST" action=".">
   {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit">Submit</button>
+  {{ form|crispy }}
+  
+  <div class="control">
+    <button type="submit" class="button is-block is-primary is-fullwidth is-medium">Submit</button>
+  </div>
 </form>
+<div class="control">
+  <button class="button is-block is-light is-fullwidth is-medium">
+    <a href="{% url 'leads:lead-list' %}">Cancel</a>
+  </button>
+</div>
 
 
 {% endblock content-dashboard %}
