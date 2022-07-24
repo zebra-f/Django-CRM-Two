@@ -83,13 +83,10 @@ class LeadsManagementAccessPermissionMixin:
                 return HttpResponse(self.http_response_message)
         
         elif request.user.is_agent:
-            if lead.affiliation == request.user.agent.affiliation:
-                if lead.agent == None:
-                    return HttpResponse(self.http_response_message)
-                elif lead.agent == request.user.agent:
+            if lead.agent == request.user.agent:
                     return self.render_to_response(context)
-                else:
-                    return HttpResponse(self.http_response_message)
+            else:
+                return HttpResponse(self.http_response_message)
 
         return HttpResponse(self.http_response_message)
 
