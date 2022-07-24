@@ -16,9 +16,9 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django import forms
 
 
-from .models import Lead, Agent, User
+from .models import Lead, Agent
 from .forms import LeadModelForm, CustomUserCreationForm, AssignAgentForm
-from .mixins import OwnerRequiredMixin
+from .mixins import OwnerRequiredMixin, LeadsManagementAccessPermissionMixin
 
 # Create your views here.
 
@@ -58,7 +58,10 @@ class LeadListView(LoginRequiredMixin, ListView):
         return queryset
     
 
-class LeadDetailView(LoginRequiredMixin, DetailView):
+class LeadDetailView(
+    LoginRequiredMixin,
+    LeadsManagementAccessPermissionMixin, 
+    DetailView):
 
     template_name = 'leads/lead_detail.html'
     model = Lead
@@ -108,7 +111,11 @@ class LeadCreateView(LoginRequiredMixin, CreateView):
         return HttpResponseRedirect(self.success_url)
 
 
-class LeadUpdateView(LoginRequiredMixin, UpdateView):
+class LeadUpdateView(
+    LoginRequiredMixin,
+    LeadsManagementAccessPermissionMixin, 
+    UpdateView
+    ):
     
     template_name = 'leads/lead_update.html'
     model = Lead
@@ -147,7 +154,13 @@ class LeadUpdateView(LoginRequiredMixin, UpdateView):
         return HttpResponseRedirect(self.success_url)
 
 
-class LeadAssignAgentUpdateView(OwnerRequiredMixin, LoginRequiredMixin, UpdateView):
+class LeadAssignAgentUpdateView(
+    OwnerRequiredMixin,
+    LeadsManagementAccessPermissionMixin, 
+    LoginRequiredMixin, 
+    UpdateView
+    ):
+
     template_name = 'leads/lead_assign_agent_update.html'
     model = Lead
     form_class = AssignAgentForm
