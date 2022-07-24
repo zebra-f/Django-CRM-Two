@@ -1,10 +1,10 @@
-from django.contrib.auth.mixins import AccessMixin
+# from django.contrib.auth.mixins import AccessMixin
 from django.http import HttpResponse
 
 from .models import Lead
 
 
-class OwnerRequiredMixin(AccessMixin):
+class OwnerRequiredMixin:
     """Verify that the current user is owner."""
 
     http_response_message = "You're not allowed to be here!"
@@ -16,8 +16,9 @@ class OwnerRequiredMixin(AccessMixin):
         return super().dispatch(request, *args, **kwargs)
 
 
-class LeadsManagementAccessPermissionMixin(AccessMixin):
-    
+class LeadsManagementAccessPermissionMixin:
+    """Verify that the current user is owner."""
+
     http_response_message = "You're not allowed to be here!"
 
 
