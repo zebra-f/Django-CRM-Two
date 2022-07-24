@@ -17,7 +17,7 @@ from django import forms
 
 
 from .models import Lead, Agent
-from .forms import LeadModelForm, CustomUserCreationForm, AssignAgentForm
+from .forms import LeadModelForm, CustomUserCreationForm, AssignAgentForm, DeleteForm
 from .mixins import OwnerRequiredMixin, LeadsManagementAccessPermissionMixin
 
 # Create your views here.
@@ -189,10 +189,25 @@ class LeadAssignAgentUpdateView(
     #     return kwargs
 
 
+
 def lead_delete(request, pk):
 
-    lead = Lead.objects.get(id=pk)
-    lead.delete()
+    if request.method == "GET":
+        return HttpResponse("What are you doing here?!")
+    
+    if request.method == "POST":
+        
+        form = DeleteForm(request.POST)
+        if form.is_valid:
+            lead = Lead.objects.get(pk=pk)
+            
+            if request.user.is_agent:
+                if request.user.agent == lead.agent:
+                    lead.delete()
+            
+            elif request.user.is_owner:
+                if lead.affiliation == request.user.affiliation:
+                    lead.delete()
 
     return redirect('/leads')
 

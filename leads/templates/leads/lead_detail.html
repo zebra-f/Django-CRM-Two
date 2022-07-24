@@ -8,7 +8,15 @@
 <hr />
 <h1>{{ lead.affiliation }} {{ lead.agent }}</h1>
 <a href="{% url 'leads:lead-update' lead.id %}">Update</a>
-<a href="{% url 'leads:lead-delete' lead.id %}">Delete</a>
+
+<form method="POST" action="{% url 'leads:lead-delete' lead.id %}">
+  {% csrf_token %}
+  <div class="control">
+    <button type="submit" class="button is-block is-primary is-fullwidth is-medium">CONFIRM DELETE</button>
+  </div>
+</form>
+
+{% comment %} <a href="{% url 'leads:lead-delete' lead.id %}">Delete</a> {% endcomment %}
 <a href="{% url 'leads:lead-assign-agent-update' lead.id %}">Assign</a>
     
 

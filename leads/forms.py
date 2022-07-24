@@ -55,3 +55,7 @@ class AssignAgentForm(forms.ModelForm):
     #     self.fields["agent"].queryset = agents
 
     # forms.Model
+
+
+class DeleteForm(forms.Form):
+    pass
