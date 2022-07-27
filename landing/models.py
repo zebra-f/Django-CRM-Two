@@ -11,13 +11,13 @@ class User(AbstractUser):
 
 class Affiliation(models.Model):
     name = models.CharField(max_length=200, null=True)
-    user = models.OneToOneField("User", on_delete=models.CASCADE)
+    owner = models.OneToOneField("User", on_delete=models.CASCADE)
 
     def __str__(self):
         if self.name:
-            return f"{self.user.username}, {self.name}"
+            return f"{self.owner.username}, {self.name}"
         else:
-            return self.user.username
+            return self.owner.username
 
 # Signals 
 
@@ -28,7 +28,7 @@ def post_user_created_singal(sender, instance, created, **kwargs):
 
     if created:
         if instance.is_owner:
-            Affiliation.objects.create(user=instance)
+            Affiliation.objects.create(owner=instance)
    
 
 post_save.connect(post_user_created_singal, sender=User)
