@@ -26,7 +26,7 @@ from django.contrib.auth.views import (
     PasswordResetConfirmView,
     )
 
-from leads.views import SignupView
+from landing.views import SignupView
 
 
 class CustomPasswordResetConfirmView(SuccessMessageMixin, PasswordResetConfirmView):

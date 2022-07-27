@@ -15,27 +15,13 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 from django import forms
 
-
-from .models import Lead, Agent
-from .forms import LeadModelForm, CustomUserCreationForm, AssignAgentForm, DeleteForm
+from .models import Lead
+from .forms import LeadModelForm, AssignAgentForm, DeleteForm
 from .mixins import OwnerRequiredMixin, LeadsManagementAccessPermissionMixin
 
+from agents.models import Agent
+
 # Create your views here.
-
-# Registration
-
-class SignupView(CreateView):
-    
-    template_name = 'registration/signup.html'
-    form_class = CustomUserCreationForm
-    success_url = reverse_lazy('login')
-
-    def get(self, request, *args, **kwargs):
-        if request.user.is_authenticated:
-            return HttpResponseRedirect(reverse('leads:lead-list'))
-        else:
-            return super().get(request, *args, **kwargs)
-
 
 # Leads
 

@@ -1,8 +1,6 @@
 # from django.contrib.auth.mixins import AccessMixin
 from django.http import HttpResponse, Http404
 
-from .models import Lead
-
 
 class OwnerRequiredMixin:
     """Verify that the current user is owner."""

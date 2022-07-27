@@ -10,7 +10,7 @@ from django.core.mail import send_mail
 from django.utils.crypto import get_random_string
 
 
-from leads.models import Agent
+from .models import Agent
 from .forms import AgentUpdateModelForm, UserAgentModelForm
 from .mixins import OwnerRequiredMixin
 
