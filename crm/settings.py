@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'leads',
     'landing',
 
+    'django_filters',
+
     'fontawesomefree',
     'crispy_forms',
     'crispy_bulma',

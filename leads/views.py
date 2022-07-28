@@ -15,8 +15,10 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 from django import forms
 
+
 from .models import Lead
 from .forms import LeadModelForm, AssignAgentForm, DeleteForm
+from .filters import LeadListFilter
 from .mixins import OwnerRequiredMixin, LeadsManagementAccessPermissionMixin
 
 from agents.models import Agent
@@ -42,6 +44,31 @@ class LeadListView(LoginRequiredMixin, ListView):
             queryset = queryset.filter(agent=user.agent)
         
         return queryset
+
+
+    def render_to_response(self, context, **response_kwargs):
+        response_kwargs.setdefault('content_type', self.content_type)
+        
+        if len(self.request.GET) > 0:
+            filter = LeadListFilter(self.request.GET, queryset=self.model.objects.all())
+            context_update = {
+                'filter': filter,
+                self.context_object_name: filter.qs
+            }
+            context.update(**context_update)
+       
+        else:
+            context.update(
+                filter=LeadListFilter(),
+            )
+
+        return self.response_class(
+            request=self.request,
+            template=self.get_template_names(),
+            context=context,
+            using=self.template_engine,
+            **response_kwargs
+        )
     
 
 class LeadDetailView(
