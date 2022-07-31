@@ -48,122 +48,163 @@
 </section>
 
 <hr />
-<form method="get">
-  {{ filter.form|crispy }}
-  <div class="control">
-    <button type="submit" class="button is-block is-primary is-fullwidth is-medium">Filter</button>
-  </div>
-</form>
 
 
+<div class="columns">
 
-<a href="{% url 'leads:lead-create' %}">
-  <span class="tag is-success">Create Lead <i class="fa-solid fa-circle-plus fa-fw"></i></span>
-</a>
+  <div class="column is-9">
 
-<table class="table">
-  <thead>
-    <tr>
-      <th><abbr title="Position">ID</abbr></th>
-      <th>Name</th>
-      <th><abbr title="Played">Update</abbr></th>
-      <th><abbr title="Goals for">Delete</abbr></th>
-      <th>Qualification or relegation</th>
-    </tr>
-  </thead>
-  
-  {% for lead in leads %}
-    <tbody>
-      <tr>
-        <th>{{ lead.id }}</th>
-        <td>
-          <a href="{% url 'leads:lead-detail' lead.id %}" title="Details">{{ lead.first_name }}  {{ lead.last_name }}</a>
-        </td>
-        <td>
-          <span class="tag is-primary"><i class="fa-solid fa-pen"></i></span>
-        </td>
-        <td>
-          <span class="tag is-danger"><i class="fa-solid fa-trash"></i></span>
-        </td>
-        <td>Qualification for the <a href="https://en.wikipedia.org/wiki/2016%E2%80%9317_UEFA_Champions_League#Group_stage" title="2016–17 UEFA Champions League">Champions League group stage</a></td>
-      </tr>
-    </tbody>
-  {% endfor %}
+    <div class="columns">
 
-</table>
+      <div class="column is-4">
+        <a href="{% url 'leads:lead-create' %}">
+          <span class="button is-block is-success is-small">Add New Lead <i class="fa-solid fa-circle-plus fa-fw"></i></span>
+        </a>
 
-
-{% if is_paginated %}
-<nav class="pagination" role="navigation" aria-label="pagination">
-
-  {% if page_obj.previous_page_number != 0 %}
-    <a class="pagination-previous" href="?{% param_replace page=page_obj.previous_page_number %}">Previous</a>
-  {% else %}
-    <a class="pagination-previous is-disabled">Previous</a>
-  {% endif %}
-
-  {% if page_obj.next_page_number <= paginator.num_pages %}
-    <a class="pagination-next" href="?{% param_replace page=page_obj.next_page_number %}">Next</a>
-  {% else %}
-    <a class="pagination-next is-disabled">Next</a>
-  {% endif %}
-
-  
-  <ul class="pagination-list">
-
-    {% if page_obj.has_previous %}
-      <li>
-        <a class="pagination-link" href="?{% param_replace page=1 %}">First</a>
-      </li>
-    {% endif %}
-
-    <li>
-      <span class="pagination-ellipsis">&hellip;</span>
-    </li>
-    
-    {% if page_obj.has_previous %}
-      {% if page_obj.previous_page_number != 0 %}
-        <li>
-          <a class="pagination-link" href="?{% param_replace page=page_obj.previous_page_number %}">
-            {{ page_obj.previous_page_number }}
-          </a>
-        </li>
-      {% endif %}
-    {% endif %}
-
-    {% comment %} CURRENT {% endcomment %}
-    <li>
-      <a class="pagination-link is-current has-background-primary" aria-current="page">
-        {{ page_obj.number}}
-      </a>
-    </li>
-    {% comment %} CURRENT {% endcomment %}
-    
-    {% if page_obj.has_next %}
-      {% if page_obj.next_page_number <= paginator.num_pages %}
-        <li>
-          <a class="pagination-link" href="?{% param_replace page=page_obj.next_page_number %}">
-            {{ page_obj.next_page_number }}
-          </a>
-        </li>
-      {% endif %}
-    {% endif %}
+        <a href="#">
+          <span class="button is-block is-danger is-small">Do Something Else <i class="fa-solid fa-circle-plus fa-fw"></i></span>
+        </a>
+        
+      </div>
       
-    <li>
-      <span class="pagination-ellipsis">&hellip;</span>
-    </li>
+      <div class="column is-4">
+      </div>
+      
+      <div class="column is-4 pt-4">
+        <a href="{% url 'leads:lead-create' %}">
+          <span class="button is-block is-light is-medium">Sort</i></span>
+        </a>
+      </div>
+    
+    </div>
+    
 
-    {% if page_obj.has_next %}
-      <li>
-        <a class="pagination-link" href="?{% param_replace page=paginator.num_pages %}">Last</a>
-      </li>
+
+    
+    <table class="table">
+      <thead>
+        <tr>
+          <th><abbr title="Position">ID</abbr></th>
+          <th>Name</th>
+          <th><abbr title="Played">Update</abbr></th>
+          <th><abbr title="Goals for">Delete</abbr></th>
+          <th>Qualification or relegation</th>
+        </tr>
+      </thead>
+      
+      {% for lead in leads %}
+        <tbody>
+          <tr>
+            <th>{{ lead.id }}</th>
+            <td>
+              <a href="{% url 'leads:lead-detail' lead.id %}" title="Details">{{ lead.first_name }}  {{ lead.last_name }}</a>
+            </td>
+            <td>
+              <span class="tag is-primary"><i class="fa-solid fa-pen"></i></span>
+            </td>
+            <td>
+              <span class="tag is-danger"><i class="fa-solid fa-trash"></i></span>
+            </td>
+            <td>Qualification for the <a href="https://en.wikipedia.org/wiki/2016%E2%80%9317_UEFA_Champions_League#Group_stage" title="2016–17 UEFA Champions League">Champions League group stage</a></td>
+          </tr>
+        </tbody>
+      {% endfor %}
+    
+    </table>
+    
+    
+    {% if is_paginated %}
+    <nav class="pagination" role="navigation" aria-label="pagination">
+    
+      {% if page_obj.previous_page_number != 0 %}
+        <a class="pagination-previous" href="?{% param_replace page=page_obj.previous_page_number %}">Previous</a>
+      {% else %}
+        <a class="pagination-previous is-disabled">Previous</a>
+      {% endif %}
+    
+      {% if page_obj.next_page_number <= paginator.num_pages %}
+        <a class="pagination-next" href="?{% param_replace page=page_obj.next_page_number %}">Next</a>
+      {% else %}
+        <a class="pagination-next is-disabled">Next</a>
+      {% endif %}
+    
+      
+      <ul class="pagination-list">
+    
+        {% if page_obj.has_previous %}
+          <li>
+            <a class="pagination-link" href="?{% param_replace page=1 %}">First</a>
+          </li>
+        {% endif %}
+    
+        <li>
+          <span class="pagination-ellipsis">&hellip;</span>
+        </li>
+        
+        {% if page_obj.has_previous %}
+          {% if page_obj.previous_page_number != 0 %}
+            <li>
+              <a class="pagination-link" href="?{% param_replace page=page_obj.previous_page_number %}">
+                {{ page_obj.previous_page_number }}
+              </a>
+            </li>
+          {% endif %}
+        {% endif %}
+    
+        {% comment %} CURRENT {% endcomment %}
+        <li>
+          <a class="pagination-link is-current has-background-primary" aria-current="page">
+            {{ page_obj.number}}
+          </a>
+        </li>
+        {% comment %} CURRENT {% endcomment %}
+        
+        {% if page_obj.has_next %}
+          {% if page_obj.next_page_number <= paginator.num_pages %}
+            <li>
+              <a class="pagination-link" href="?{% param_replace page=page_obj.next_page_number %}">
+                {{ page_obj.next_page_number }}
+              </a>
+            </li>
+          {% endif %}
+        {% endif %}
+          
+        <li>
+          <span class="pagination-ellipsis">&hellip;</span>
+        </li>
+    
+        {% if page_obj.has_next %}
+          <li>
+            <a class="pagination-link" href="?{% param_replace page=paginator.num_pages %}">Last</a>
+          </li>
+        {% endif %}
+    
+      </ul>
+    
+    
+    </nav>
     {% endif %}
+  
+  </div>
 
-  </ul>
+  <div class="column is-3 pt-4">
+    <div class="control">
+      <a class="button is-block is-warning is-fullwidth is-medium" href="{% url 'leads:lead-list' %}">Reset</a>
+    </div>
+    
+    <form class="mt-4" method="get">
+      {{ filter.form|crispy }}
+      <div class="control">
+        <button type="submit" class="button is-block is-primary is-fullwidth is-medium">Filter</button>
+      </div>
+    </form>
+
+  </div>
+
+</div>
 
 
-</nav>
-{% endif %}
+
 
 <hr />
 

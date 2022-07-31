@@ -31,7 +31,7 @@ class LeadListView(LoginRequiredMixin, ListView):
 
     template_name = 'leads/lead_list.html'
     model = Lead
-    paginate_by: int = 4
+    paginate_by: int = 6
     context_object_name = 'leads'
 
 
@@ -50,7 +50,7 @@ class LeadListView(LoginRequiredMixin, ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['filter'] = LeadListFilter()
+        context['filter'] = LeadListFilter(self.request.GET)
         return context
 
 
