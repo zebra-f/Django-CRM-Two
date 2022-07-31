@@ -1,5 +1,8 @@
 {% extends 'dashboard/base_dashboard.html' %}
 {% load crispy_forms_filters %}
+
+{% load my_tags %}
+
 {% block content-dashboard %}
    
 <section class="hero is-info welcome is-small">
@@ -89,6 +92,24 @@
 
 </table>
 
+{% if is_paginated %}
+  {% if page_obj.has_previous %}
+    <a href="?{% param_replace page=1 %}">First</a>
+    {% if page_obj.previous_page_number != 1 %}
+      <a href="?{% param_replace page=page_obj.previous_page_number %}">Previous</a>
+    {% endif %}
+  {% endif %}
+
+  Page {{ page_obj.number }} of {{ paginator.num_pages }}
+
+  {% if page_obj.has_next %}
+    {% if page_obj.next_page_number != paginator.num_pages %}
+      <a href="?{% param_replace page=page_obj.next_page_number %}">Next</a>
+    {% endif %}
+    <a href="?{% param_replace page=paginator.num_pages %}">Last</a>
+  {% endif %}
+
+{% endif %}
 
 
 {% endblock content-dashboard %}

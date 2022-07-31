@@ -13,7 +13,9 @@ class Lead(models.Model):
         ('Facebook', 'Facebook'),
         ('Newsletter', 'Newsletter'),
         ('Other', 'Other'),
-    )   
+    )
+    
+    date_added = models.DateTimeField(auto_now_add=True, null=False)
 
     first_name = models.CharField(max_length=40)
     last_name = models.CharField(max_length=40)
@@ -47,7 +49,7 @@ class LeadStatus(models.Model):
 
     lead = models.OneToOneField("Lead", on_delete=models.CASCADE)
 
-    status = models.CharField(max_length=40, default="New",  choices=STATUS_CHOICES)
+    status = models.CharField(max_length=40, default="New", choices=STATUS_CHOICES)
     last_status_update = models.DateTimeField(auto_now_add=True, null=False)
     
     public_note = models.CharField(max_length=1000, null=True, blank=True)

@@ -31,45 +31,28 @@ class LeadListView(LoginRequiredMixin, ListView):
 
     template_name = 'leads/lead_list.html'
     model = Lead
+    paginate_by: int = 4
     context_object_name = 'leads'
 
+
     def get_queryset(self):
-        
+        queryset = super().get_queryset()
+
         user = self.request.user
-        
         if user.is_owner:
-            queryset = Lead.objects.filter(affiliation=user.affiliation)
+            queryset = queryset.filter(affiliation=user.affiliation)
         elif user.is_agent:
-            queryset = Lead.objects.filter(affiliation=user.agent.affiliation)
+            queryset = queryset.filter(affiliation=user.agent.affiliation)
             queryset = queryset.filter(agent=user.agent)
         
-        return queryset
+        return LeadListFilter(self.request.GET, queryset=queryset).qs.order_by('-date_added')
 
 
-    def render_to_response(self, context, **response_kwargs):
-        response_kwargs.setdefault('content_type', self.content_type)
-        
-        if len(self.request.GET) > 0:
-            filter = LeadListFilter(self.request.GET, queryset=self.model.objects.all())
-            context_update = {
-                'filter': filter,
-                self.context_object_name: filter.qs
-            }
-            context.update(**context_update)
-       
-        else:
-            context.update(
-                filter=LeadListFilter(),
-            )
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['filter'] = LeadListFilter()
+        return context
 
-        return self.response_class(
-            request=self.request,
-            template=self.get_template_names(),
-            context=context,
-            using=self.template_engine,
-            **response_kwargs
-        )
-    
 
 class LeadDetailView(
     LoginRequiredMixin,
