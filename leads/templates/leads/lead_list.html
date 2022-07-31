@@ -92,24 +92,79 @@
 
 </table>
 
+
 {% if is_paginated %}
-  {% if page_obj.has_previous %}
-    <a href="?{% param_replace page=1 %}">First</a>
-    {% if page_obj.previous_page_number != 1 %}
-      <a href="?{% param_replace page=page_obj.previous_page_number %}">Previous</a>
-    {% endif %}
+<nav class="pagination" role="navigation" aria-label="pagination">
+
+  {% if page_obj.previous_page_number != 0 %}
+    <a class="pagination-previous" href="?{% param_replace page=page_obj.previous_page_number %}">Previous</a>
+  {% else %}
+    <a class="pagination-previous is-disabled">Previous</a>
   {% endif %}
 
-  Page {{ page_obj.number }} of {{ paginator.num_pages }}
-
-  {% if page_obj.has_next %}
-    {% if page_obj.next_page_number != paginator.num_pages %}
-      <a href="?{% param_replace page=page_obj.next_page_number %}">Next</a>
-    {% endif %}
-    <a href="?{% param_replace page=paginator.num_pages %}">Last</a>
+  {% if page_obj.next_page_number <= paginator.num_pages %}
+    <a class="pagination-next" href="?{% param_replace page=page_obj.next_page_number %}">Next</a>
+  {% else %}
+    <a class="pagination-next is-disabled">Next</a>
   {% endif %}
 
+  
+  <ul class="pagination-list">
+
+    {% if page_obj.has_previous %}
+      <li>
+        <a class="pagination-link" href="?{% param_replace page=1 %}">First</a>
+      </li>
+    {% endif %}
+
+    <li>
+      <span class="pagination-ellipsis">&hellip;</span>
+    </li>
+    
+    {% if page_obj.has_previous %}
+      {% if page_obj.previous_page_number != 0 %}
+        <li>
+          <a class="pagination-link" href="?{% param_replace page=page_obj.previous_page_number %}">
+            {{ page_obj.previous_page_number }}
+          </a>
+        </li>
+      {% endif %}
+    {% endif %}
+
+    {% comment %} CURRENT {% endcomment %}
+    <li>
+      <a class="pagination-link is-current has-background-primary" aria-current="page">
+        {{ page_obj.number}}
+      </a>
+    </li>
+    {% comment %} CURRENT {% endcomment %}
+    
+    {% if page_obj.has_next %}
+      {% if page_obj.next_page_number <= paginator.num_pages %}
+        <li>
+          <a class="pagination-link" href="?{% param_replace page=page_obj.next_page_number %}">
+            {{ page_obj.next_page_number }}
+          </a>
+        </li>
+      {% endif %}
+    {% endif %}
+      
+    <li>
+      <span class="pagination-ellipsis">&hellip;</span>
+    </li>
+
+    {% if page_obj.has_next %}
+      <li>
+        <a class="pagination-link" href="?{% param_replace page=paginator.num_pages %}">Last</a>
+      </li>
+    {% endif %}
+
+  </ul>
+
+
+</nav>
 {% endif %}
 
+<hr />
 
 {% endblock content-dashboard %}
