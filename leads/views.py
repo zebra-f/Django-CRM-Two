@@ -31,7 +31,7 @@ class LeadListView(LoginRequiredMixin, ListView):
 
     template_name = 'leads/lead_list.html'
     model = Lead
-    paginate_by: int = 6
+    paginate_by: int = 7
     context_object_name = 'leads'
 
 

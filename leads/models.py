@@ -52,5 +52,4 @@ class LeadStatus(models.Model):
     status = models.CharField(max_length=40, default="New", choices=STATUS_CHOICES)
     last_status_update = models.DateTimeField(auto_now_add=True, null=False)
     
-    public_note = models.CharField(max_length=1000, null=True, blank=True)
-    private_note = models.CharField(max_length=1000, null=True, blank=True)
+    note = models.TextField(max_length=1000, null=True, blank=True)

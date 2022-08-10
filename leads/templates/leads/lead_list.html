@@ -1,23 +1,9 @@
 {% extends 'dashboard/base_dashboard.html' %}
 {% load crispy_forms_filters %}
-
 {% load my_tags %}
 
 {% block content-dashboard %}
-   
-<section class="hero is-info welcome is-small">
-  <div class="hero-body">
-      <div class="container">
-          <h1 class="title">
-              Hello,
-          </h1>
-          <h2 class="subtitle">
-              I hope you are having a great day!
-          </h2>
-      </div>
-  </div>
-</section>
-<hr>
+
 <section class="info-tiles">
   <div class="tile is-ancestor has-text-centered">
       <div class="tile is-parent">
@@ -54,7 +40,7 @@
 
   <div class="column is-9">
 
-    <div class="columns">
+    <div class="columns has-background-light">
 
       <div class="column is-4">
         <a href="{% url 'leads:lead-create' %}">
@@ -72,28 +58,26 @@
       
       <div class="column is-4 pt-4">
         <a href="{% url 'leads:lead-create' %}">
-          <span class="button is-block is-light is-medium">Sort</i></span>
+          <span class="button is-block is-outlined is-medium">Sort</i></span>
         </a>
       </div>
     
     </div>
     
-
-
     
-    <table class="table">
+    <table class="table is-bordered is-striped is-fullwidth">
       <thead>
         <tr>
-          <th><abbr title="Position">ID</abbr></th>
+          <th>ID</th>
           <th>Name</th>
-          <th><abbr title="Played">Update</abbr></th>
-          <th><abbr title="Goals for">Delete</abbr></th>
-          <th>Qualification or relegation</th>
+          <th>Update</th>
+          <th><abbr title="Proceed with Caution">Delete</abbr></th>
+          <th>Email</th>
+          <th>Phone</th>
         </tr>
       </thead>
-      
-      {% for lead in leads %}
-        <tbody>
+      <tbody>
+        {% for lead in leads %}
           <tr>
             <th>{{ lead.id }}</th>
             <td>
@@ -105,10 +89,15 @@
             <td>
               <span class="tag is-danger"><i class="fa-solid fa-trash"></i></span>
             </td>
-            <td>Qualification for the <a href="https://en.wikipedia.org/wiki/2016%E2%80%9317_UEFA_Champions_League#Group_stage" title="2016–17 UEFA Champions League">Champions League group stage</a></td>
+            <td>
+              {{ lead.email }}
+            </td>
+            <td>
+              {{ lead.phone }}
+            </td>
           </tr>
-        </tbody>
-      {% endfor %}
+        {% endfor %}
+      </tbody>
     
     </table>
     
@@ -187,7 +176,7 @@
   
   </div>
 
-  <div class="column is-3 pt-4">
+  <div class="column is-3 pt-4 has-background-light">
     <div class="control">
       <a class="button is-block is-warning is-fullwidth is-medium" href="{% url 'leads:lead-list' %}">Reset</a>
     </div>
@@ -207,5 +196,11 @@
 
 
 <hr />
+
+{% comment %} <style>
+  table tbody:nth-child(even) {
+    background-color: #F5F5F5;
+  }
+</style> {% endcomment %}
 
 {% endblock content-dashboard %}

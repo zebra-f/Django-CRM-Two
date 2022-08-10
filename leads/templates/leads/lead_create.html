@@ -5,24 +5,23 @@
 
     
 <div class="content my-6 mx-4">
-<h1>Add new Lead:</h1>
-<div class="box my-4 mx-4">
-<form method="POST" action=".">
-  {% csrf_token %}
-  {{ form|crispy }}
+  <h1>Add New Lead:</h1>
+  <div class="box my-4 mx-4">
+    <form method="POST" action=".">
+      {% csrf_token %}
+      {{ form|crispy }}
 
-  <div class="control">
-    <button type="submit" class="button is-block is-primary is-fullwidth is-medium">Submit</button>
+      <div class="control">
+        <button type="submit" class="button is-block is-primary is-fullwidth is-medium">Submit</button>
+      </div>
+    </form>
+
+    <div class="control">
+      <button class="button is-block is-light is-fullwidth is-medium">
+        <a href="{% url 'leads:lead-list' %}">Cancel</a>
+      </button>
+    </div>
   </div>
-</form>
-
-<div class="control">
-  <button class="button is-block is-light is-fullwidth is-medium">
-    <a href="{% url 'agents:agent-list' %}">Cancel</a>
-  </button>
-</div>
-
-</div>
 </div>
 
 {% endblock content-dashboard %}
