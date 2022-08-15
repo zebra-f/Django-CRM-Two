@@ -33,9 +33,14 @@ class LeadListView(LoginRequiredMixin, ListView):
     model = Lead
     paginate_by: int = 7
     context_object_name = 'leads'
+    ordering = ["-date_added"]
 
 
     def get_queryset(self):
+
+        if self.request.GET.get("ordering"):
+            self.ordering = [f'-{self.request.GET.get("ordering")}']
+        
         queryset = super().get_queryset()
 
         user = self.request.user
@@ -45,7 +50,7 @@ class LeadListView(LoginRequiredMixin, ListView):
             queryset = queryset.filter(affiliation=user.agent.affiliation)
             queryset = queryset.filter(agent=user.agent)
         
-        return LeadListFilter(self.request.GET, queryset=queryset).qs.order_by('-date_added')
+        return LeadListFilter(self.request.GET, queryset=queryset).qs
 
 
     def get_context_data(self, **kwargs):

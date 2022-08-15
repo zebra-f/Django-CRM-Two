@@ -42,23 +42,21 @@
 
     <div class="columns has-background-light">
 
-      <div class="column is-4">
-        <a href="{% url 'leads:lead-create' %}">
-          <span class="button is-block is-success is-small">Add New Lead <i class="fa-solid fa-circle-plus fa-fw"></i></span>
-        </a>
-
-        <a href="#">
-          <span class="button is-block is-danger is-small">Do Something Else <i class="fa-solid fa-circle-plus fa-fw"></i></span>
-        </a>
-        
-      </div>
-      
-      <div class="column is-4">
-      </div>
-      
       <div class="column is-4 pt-4">
         <a href="{% url 'leads:lead-create' %}">
-          <span class="button is-block is-outlined is-medium">Sort</i></span>
+          <span class="button is-block is-success is-medium">Add New Lead <i class="fa-solid fa-circle-plus fa-fw"></i></span>
+        </a>
+      </div>
+      
+      <div class="column is-4">
+      </div>
+      
+      <div class="column is-4">
+        <a href="?{% param_replace ordering="first_name" %}">
+          <span class="button is-block is-outlined is-small">Sort by: Frirst Name</i></span>
+        </a>
+        <a href="?{% param_replace ordering="last_name" %}">
+          <span class="button is-block is-danger is-small">Sort by: Last Name</i></span>
         </a>
       </div>
     
