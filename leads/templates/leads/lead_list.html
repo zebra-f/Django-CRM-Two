@@ -179,13 +179,15 @@
       <a class="button is-block is-warning is-fullwidth is-medium" href="{% url 'leads:lead-list' %}">Reset</a>
     </div>
     
+    
     <form class="mt-4" method="get">
+      <div class="container mx-4">
       {{ filter.form|crispy }}
-      <div class="control">
+      </div>
+      <div class="control mt-5">
         <button type="submit" class="button is-block is-primary is-fullwidth is-medium">Filter</button>
       </div>
     </form>
-
   </div>
 
 </div>
